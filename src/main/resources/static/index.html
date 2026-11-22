@@ -1,0 +1,8 @@
+<!doctype html><html lang="ru"><meta charset="utf-8"><title>Java API Lab</title>
+<style>body{font:18px system-ui;max-width:760px;margin:60px auto;background:#101822;color:#eef}button{padding:16px;margin:8px;border-radius:8px;background:#64d4b0;cursor:pointer}pre{white-space:pre-wrap}</style>
+<h1>Java API Lab</h1><p>Spring / Java 21 · реальные HTTP-запросы</p>
+<button onclick="send('/api/divide?a=12&b=3')">12 ÷ 3</button>
+<button onclick="send('/api/divide?a=12&b=0')">Деление на ноль</button>
+<button onclick="send('/api/parse?value=42')">Число 42</button>
+<button onclick="send('/api/parse?value=hello')">Буквы вместо числа</button><pre id="result"></pre>
+<script>async function send(url){let r=await fetch(url);document.getElementById('result').textContent=r.status+' '+await r.text()}</script></html>
