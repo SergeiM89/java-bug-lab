@@ -1,8 +1,6 @@
 package lab;
 
 import java.util.Map;
-import org.springframework.web.server.ResponseStatusException;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,13 +12,11 @@ public class ApiController {
 
     @GetMapping("/api/divide")
     public Map<String, Integer> divide(@RequestParam int a, @RequestParam int b) {
-        if (b == 0) throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "b must be nonzero");
         return Map.of("result", a / b);
     }
 
     @GetMapping("/api/parse")
     public Map<String, Integer> parse(@RequestParam String value) {
-        try { return Map.of("result", Integer.parseInt(value)); }
-        catch (NumberFormatException e) { throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "value must be an integer"); }
+        return Map.of("result", Integer.parseInt(value));
     }
 }
