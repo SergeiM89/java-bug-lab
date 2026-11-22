@@ -8,7 +8,7 @@ Runtime: `java -jar app.jar`. UI: `/`.
 - `GET /api/divide?a=12&b=3` → `{"result":4}`; b=0 должен давать штатный 4xx.
 - `GET /api/parse?value=42` → `{"result":42}`; value=hello должен давать штатный 4xx.
 - Stack traces: stdout/stderr. HTTP access log: `/tmp/access.log`, перечитывать после ротации.
-- Tests внутри Maven builder: `mvn -o -B test`. В JRE image Maven отсутствует;
+- Tests внутри Maven builder: `mvn -B test`. В JRE image Maven отсутствует;
   минимальная runtime-регрессия — отрицательные и корректные HTTP probes.
 
 ## Запуск в Docker
@@ -25,9 +25,10 @@ docker run --rm -p 127.0.0.1:8081:8080 java-bug-lab
 
 ```sh
 docker build --target build -t java-bug-lab-tests .
-docker run --rm java-bug-lab-tests mvn -o -B test
+docker run --rm java-bug-lab-tests mvn -B test
 ```
 
+При первом запуске тестов нужен доступ к Maven Central для загрузки JUnit-провайдера.
 В исходной версии два отрицательных теста намеренно завершаются ошибками:
 цель задания — исправить приложение.
 
