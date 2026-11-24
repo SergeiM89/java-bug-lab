@@ -1,11 +1,9 @@
 package lab;
 
 import java.util.Map;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 public class ApiController {
@@ -14,14 +12,11 @@ public class ApiController {
 
     @GetMapping("/api/divide")
     public Map<String, Integer> divide(@RequestParam int a, @RequestParam int b) {
-        if (b == 0) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "b must not be zero");
-        }
         return Map.of("result", a / b);
     }
 
     @GetMapping("/api/parse")
-    public Map<String, Integer> parse(@RequestParam int value) {
-        return Map.of("result", value);
+    public Map<String, Integer> parse(@RequestParam String value) {
+        return Map.of("result", Integer.parseInt(value));
     }
 }
